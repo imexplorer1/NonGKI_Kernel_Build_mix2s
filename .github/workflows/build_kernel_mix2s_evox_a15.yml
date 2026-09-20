@@ -194,7 +194,12 @@ jobs:
           KSU_VERSION=$(cd ${{ env.KERNELSU_NAME }} && expr $(/usr/bin/git rev-list --count HEAD) + 10200)
           echo "UPLOADNAME=-${{ env.KERNELSU_NAME }}_$KSU_VERSION" >> $GITHUB_ENV
           echo "PACK_METHOD=MKBOOTIMG" >> $GITHUB_ENV
+      
+      - name: Set up NoMount
+        run: |
+          cd $GITHUB_WORKSPACE/device_kernel
           curl https://raw.githubusercontent.com/maxsteeel/nomount/refs/heads/dev/kernel/setup.sh | bash -
+          echo "CONFIG_NOMOUNT=y" >> ./arch/arm64/configs/${{ env.DEFCONFIG_NAME }}
 
           # Set SUSFS
           git clone $SUSFS_SOURCE -b $SUSFS_BRANCH susfs4ksu --depth=1
