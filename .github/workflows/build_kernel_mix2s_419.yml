@@ -1,4 +1,4 @@
-name: Build Kernel Xiaomi Mix2s (LineageOS) with KSU
+name: Build Kernel Xiaomi Mix2s (kernel419) with KSU
 on:
   workflow_call:
   workflow_dispatch:
