@@ -1,0 +1,12 @@
+name: [RELEASE]Build Kernel for Mix2s
+on:
+  workflow_dispatch:
+
+jobs:
+  without-susfs:
+    uses: ./.github/workflows/build_kernel_mix2s_lineage_a15.yml   # 路径相对于仓库根目录
+    # 如果需要，可以传递 secrets 或 inputs
+    # secrets: inherit
+
+  with-susfs:
+    uses: ./.github/workflows/build_kernel_mix2s_lineage_a15_susfs.yml
