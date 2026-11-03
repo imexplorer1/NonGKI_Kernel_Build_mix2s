@@ -1,4 +1,5 @@
-name: [RELEASE]Build Kernel for Mix2s
+name: (RELEASE)build kernel for mix2s
+
 on:
   workflow_dispatch:
 
