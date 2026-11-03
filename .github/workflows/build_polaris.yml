@@ -10,4 +10,4 @@ jobs:
     # secrets: inherit
 
   with-susfs:
-    uses: ./.github/workflows/build_kernel_mix2s_lineage_a15_susfs.yml
+    uses: ./.github/workflows/build_kernel_mix2s_lineage_a15-susfs.yml
