@@ -4,9 +4,9 @@ on:
 
 jobs:
   without-susfs:
-    uses: ./.github/workflows/build_kernel_mix2s_lineage_a15_dev.yml   # 路径相对于仓库根目录
+    uses: ./.github/workflows/build_kernel_mix2s_lineage-a15-dev.yml   # 路径相对于仓库根目录
     # 如果需要，可以传递 secrets 或 inputs
     # secrets: inherit
 
   with-susfs:
-    uses: ./.github/workflows/build_kernel_mix2s_lineage_a15_susfs_dev.yml
+    uses: ./.github/workflows/build_kernel_mix2s_lineage_a15-susfs-dev.yml
