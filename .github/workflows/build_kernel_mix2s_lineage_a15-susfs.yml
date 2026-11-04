@@ -349,13 +349,17 @@ jobs:
         with:
           name: Image.gz-dtb-susfs
           path: ${{ github.workspace }}/device_kernel/out/arch/arm64/boot/Image.gz-dtb
+      - name: Prepare AK3 Flasher
+        run: |
+          cd ${{github.workspace }}
+          mkdir ak3-prepare
+          cp -r ${{ github.workspace }}/device_kernel/out/arch/arm64/boot/Image.gz-dtb ./ak3-prepare
+          cp -r ${{ github.workspace }}/AnyKernel3/META-INF ./ak3-prepare
+          cp -r ${{ github.workspace }}/AnyKernel3/tools ./ak3-prepare
+          cp ${{ github.workspace }}/AnyKernel3/anykernel.sh ./ak3-prepare
       - name: Upload AK3 Flasher
         uses: actions/upload-artifact@v4
         with:
           name: AnyKernel3-susfs
           path: |
-            ${{ github.workspace }}/device_kernel/out/arch/arm64/boot/Image.gz-dtb
-            ${{ github.workspace }}/AnyKernel3/META-INF
-            ${{ github.workspace }}/AnyKernel3/tools
-            ${{ github.workspace }}/AnyKernel3/anykernel.sh
-            
+            ak3-prepare/*
