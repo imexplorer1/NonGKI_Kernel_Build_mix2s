@@ -19,6 +19,8 @@ jobs:
         run: |
           CONFIG_ENV=$(grep -w "CONFIG_ENV" Profiles/polaris_los_susfs.env | head -n 1 | cut -d "=" -f 2)
           CONFIG_LIST=(
+              AK3_SOURCE
+              AK3_BRANCH
               DEVICE_NAME
               DEVICE_CODENAME
               CUSTOM_CMDS
@@ -184,6 +186,9 @@ jobs:
           SUSFS_BRANCH=kernel-${{ env.KERNEL_VERSION }}
           KERNEL_PATCHES=https://github.com/JackA1ltman/NonGKI_Kernel_Patches.git
 
+
+          cd $GITHUB_WORKSPACE
+          git clone ${{ env.AK3_SOURCE }} -b ${{ env.AK3_BRANCH }}
           # Set KSU
 
           cd $GITHUB_WORKSPACE/device_kernel
@@ -344,4 +349,13 @@ jobs:
         with:
           name: Image.gz-dtb-susfs
           path: ${{ github.workspace }}/device_kernel/out/arch/arm64/boot/Image.gz-dtb
+      - name: Upload AK3 Flasher
+        uses: actions/upload-artifact@v4
+        with:
+          name: AnyKernel3
+          path: |
+            ${{ github.workspace }}/device_kernel/out/arch/arm64/boot/Image.gz-dtb
+            ${{ github.workspace }}/AnyKernel3/META-INF
+            ${{ github.workspace }}/AnyKernel3/tools
+            ${{ github.workspace }}/AnyKernel3/anykernel.sh
             
