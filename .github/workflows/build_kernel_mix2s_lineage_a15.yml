@@ -321,8 +321,10 @@ jobs:
           name: Image.gz-dtb
           path: |
             ${{ github.workspace }}/device_kernel/out/arch/arm64/boot/Image.gz-dtb
+      
       - name: Prepare AK3 Flasher
         run: |
+          echo "BUILD_DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
           cd ${{github.workspace }}
           mkdir ak3-prepare
           cp -r ${{ github.workspace }}/device_kernel/out/arch/arm64/boot/Image.gz-dtb ./ak3-prepare
@@ -332,7 +334,7 @@ jobs:
       - name: Upload AK3 Flasher
         uses: actions/upload-artifact@v4
         with:
-          name: AnyKernel3
+          name: AnyKernel3-polaris-${{ env.BUILD_DATE }}
           path: |
             ak3-prepare/*
             
